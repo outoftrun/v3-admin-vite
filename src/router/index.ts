@@ -5,8 +5,8 @@ import routeSettings from "@/config/route"
 const Layouts = () => import("@/layouts/index.vue")
 
 /**
- * 常驻路由
- * 除了 redirect/403/404/login 等隐藏页面，其他页面建议设置 Name 属性
+ * Resident routing
+ * Except for hidden pages such as redirect/403/404/login, it is recommended to set the Name attribute for other pages.
  */
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -54,7 +54,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/dashboard/index.vue"),
         name: "Dashboard",
         meta: {
-          title: "首页",
+          title: "front page",
           svgIcon: "dashboard",
           affix: true
         }
@@ -80,7 +80,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: "/link",
     meta: {
-      title: "外链",
+      title: "external Link",
       svgIcon: "link"
     },
     children: [
@@ -89,7 +89,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => {},
         name: "Link1",
         meta: {
-          title: "中文文档"
+          title: "Chinese documentation"
         }
       },
       {
@@ -97,7 +97,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => {},
         name: "Link2",
         meta: {
-          title: "新手教程"
+          title: "Beginner's Tutorial"
         }
       }
     ]
@@ -108,7 +108,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/table/element-plus",
     name: "Table",
     meta: {
-      title: "表格",
+      title: "grid sheet",
       elIcon: "Grid"
     },
     children: [
@@ -138,7 +138,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/menu/menu1",
     name: "Menu",
     meta: {
-      title: "多级路由",
+      title: "Multi-level routing",
       svgIcon: "menu"
     },
     children: [
@@ -251,9 +251,9 @@ export const constantRoutes: RouteRecordRaw[] = [
 ]
 
 /**
- * 动态路由
- * 用来放置有权限 (Roles 属性) 的路由
- * 必须带有 Name 属性
+ * Dynamic routing
+ * Used to place routes with permissions (Roles attribute)
+ * Must have Name attribute
  */
 export const dynamicRoutes: RouteRecordRaw[] = [
   {
@@ -262,10 +262,10 @@ export const dynamicRoutes: RouteRecordRaw[] = [
     redirect: "/permission/page",
     name: "Permission",
     meta: {
-      title: "权限",
+      title: "Permission",
       svgIcon: "lock",
-      roles: ["admin", "editor"], // 可以在根路由中设置角色
-      alwaysShow: true // 将始终显示根菜单
+      roles: ["admin", "editor"], // You can set roles in the root route
+      alwaysShow: true // The root menu will always be shown
     },
     children: [
       {
@@ -273,8 +273,8 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/permission/page.vue"),
         name: "PagePermission",
         meta: {
-          title: "页面级",
-          roles: ["admin"] // 或者在子导航中设置角色
+          title: "Page level",
+          roles: ["admin"] // Or set roles in the child navigation
         }
       },
       {
@@ -282,7 +282,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/permission/directive.vue"),
         name: "DirectivePermission",
         meta: {
-          title: "按钮级" // 如果未设置角色，则表示：该页面不需要权限，但会继承根路由的角色
+          title: "Button level" // If the role is not set, it means: the page does not need permissions, but will inherit the role of the root route
         }
       }
     ]
@@ -294,9 +294,9 @@ const router = createRouter({
   routes: routeSettings.thirdLevelRouteCache ? flatMultiLevelRoutes(constantRoutes) : constantRoutes
 })
 
-/** 重置路由 */
+/** Reset route */
 export function resetRouter() {
-  // 注意：所有动态路由路由必须带有 Name 属性，否则可能会不能完全重置干净
+  // Note: All dynamic routes must have a Name attribute, otherwise they may not be completely reset
   try {
     router.getRoutes().forEach((route) => {
       const { name, meta } = route
@@ -305,7 +305,7 @@ export function resetRouter() {
       }
     })
   } catch {
-    // 强制刷新浏览器也行，只是交互体验不是很好
+    // Forced browser refresh is also OK, but the interactive experience is not very good
     window.location.reload()
   }
 }
