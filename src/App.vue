@@ -5,17 +5,16 @@ import { ElNotification } from "element-plus"
 import zhCn from "element-plus/es/locale/lang/zh-cn"
 
 const { initTheme } = useTheme()
-
-/** 初始化主题 */
+/** Initialize the theme */
 initTheme()
 
-/** 作者小心思 */
+/** The author's careful thoughts */
 ElNotification({
   title: "Hello",
   type: "success",
   dangerouslyUseHTMLString: true,
   message:
-    "<a style='color: teal' target='_blank' href='https://github.com/un-pany/v3-admin-vite'>小项目获取 star 不易，如果你喜欢这个项目的话，欢迎点击这里支持一个 star ！这是作者持续维护的唯一动力（小声：毕竟是免费的）</a>",
+    "<a style='color: teal' target='_blank' href='https://github.com/un-pany/v3-admin-vite'>It's not easy to get a star for a small project. If you like this project, please click here to support a star! This is the only motivation for the author to continue to maintain it (whisper: after all, it's free)</a>",
   duration: 0,
   position: "bottom-right"
 })

@@ -10,7 +10,7 @@ const text = ref("")
 
 <template>
   <div class="app-container">
-    <el-card header="四级路由缓存 - menu1-2-1">
+    <el-card header="Four-level routing cache - menu1-2-1">
       <el-input v-model="text" />
     </el-card>
   </div>
