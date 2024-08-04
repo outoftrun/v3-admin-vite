@@ -4,29 +4,29 @@ import { type LayoutSettings, layoutSettings } from "@/config/layouts"
 import { setConfigLayout } from "@/utils/cache/local-storage"
 
 type SettingsStore = {
-  // 使用映射类型来遍历 layoutSettings 对象的键
+  // Use mapping type to traverse the key of the layoutSettings object
   [Key in keyof LayoutSettings]: Ref<LayoutSettings[Key]>
 }
 
 type SettingsStoreKey = keyof SettingsStore
 
 export const useSettingsStore = defineStore("settings", () => {
-  /** 状态对象 */
+  /** Status object */
   const state = {} as SettingsStore
-  // 遍历 layoutSettings 对象的键值对
+  // Traverse the key-value pairs of the layoutSettings object
   for (const [key, value] of Object.entries(layoutSettings)) {
-    // 使用类型断言来指定 key 的类型，将 value 包装在 ref 函数中，创建一个响应式变量
+    // Use type assertion to specify the type of key and wrap value in ref In the function, create a responsive variable
     const refValue = ref(value)
     // @ts-ignore
     state[key as SettingsStoreKey] = refValue
-    // 监听每个响应式变量
+    // Monitor each responsive variable
     watch(refValue, () => {
-      // 缓存
+      // Cache
       const settings = _getCacheData()
       setConfigLayout(settings)
     })
   }
-  /** 获取要缓存的数据：将 state 对象转化为 settings 对象 */
+  /** Get the data to be cached: convert the state object into a settings object */
   const _getCacheData = () => {
     const settings = {} as LayoutSettings
     for (const [key, value] of Object.entries(state)) {

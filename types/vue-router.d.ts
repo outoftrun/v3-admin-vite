@@ -19,7 +19,7 @@ declare module "vue-router" {
      */
     hidden?: boolean
     /**
-     * 设置能进入该路由的角色，支持多个角色叠加
+     * 设置能进入该路由的Role，支持多个Role叠加
      */
     roles?: string[]
     /**

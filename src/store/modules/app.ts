@@ -8,40 +8,36 @@ interface Sidebar {
   withoutAnimation: boolean
 }
 
-/** 设置侧边栏状态本地缓存 */
-function handleSidebarStatus(opened: boolean) {
+/** Set the sidebar Status local cache*/ function handleSidebarStatus(opened: boolean) {
   opened ? setSidebarStatus(SIDEBAR_OPENED) : setSidebarStatus(SIDEBAR_CLOSED)
 }
 
 export const useAppStore = defineStore("app", () => {
-  /** 侧边栏状态 */
-  const sidebar: Sidebar = reactive({
+  /** Sidebar Status */ const sidebar: Sidebar = reactive({
     opened: getSidebarStatus() !== SIDEBAR_CLOSED,
     withoutAnimation: false
   })
-  /** 设备类型 */
+  /** Device type*/
   const device = ref<DeviceEnum>(DeviceEnum.Desktop)
 
-  /** 监听侧边栏 opened 状态 */
+  /** Listen for sidebar opened Status */
   watch(
     () => sidebar.opened,
     (opened) => handleSidebarStatus(opened)
   )
-
-  /** 切换侧边栏 */
+  /** Toggle sidebar*/
   const toggleSidebar = (withoutAnimation: boolean) => {
     sidebar.opened = !sidebar.opened
     sidebar.withoutAnimation = withoutAnimation
   }
-  /** 关闭侧边栏 */
+  /** Close the sidebar*/
   const closeSidebar = (withoutAnimation: boolean) => {
     sidebar.opened = false
     sidebar.withoutAnimation = withoutAnimation
   }
-  /** 切换设备类型 */
+  /** Switch device type*/
   const toggleDevice = (value: DeviceEnum) => {
     device.value = value
   }
-
   return { device, sidebar, toggleSidebar, closeSidebar, toggleDevice }
 })

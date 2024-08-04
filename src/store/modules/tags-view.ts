@@ -11,7 +11,7 @@ export const useTagsViewStore = defineStore("tags-view", () => {
   const visitedViews = ref<TagView[]>(cacheTagsView ? getVisitedViews() : [])
   const cachedViews = ref<string[]>(cacheTagsView ? getCachedViews() : [])
 
-  /** 缓存标签栏数据 */
+  /** Cache tag bar data */
   watchEffect(() => {
     setVisitedViews(visitedViews.value)
     setCachedViews(cachedViews.value)
@@ -19,17 +19,16 @@ export const useTagsViewStore = defineStore("tags-view", () => {
 
   //#region add
   const addVisitedView = (view: TagView) => {
-    // 检查是否已经存在相同的 visitedView
+    // Check if the same visitedView already exists
     const index = visitedViews.value.findIndex((v) => v.path === view.path)
     if (index !== -1) {
-      // 防止 query 参数丢失
+      // Prevent query parameter loss
       visitedViews.value[index].fullPath !== view.fullPath && (visitedViews.value[index] = { ...view })
     } else {
-      // 添加新的 visitedView
+      // Add a new visitedView
       visitedViews.value.push({ ...view })
     }
   }
-
   const addCachedView = (view: TagView) => {
     if (typeof view.name !== "string") return
     if (cachedViews.value.includes(view.name)) return
@@ -63,7 +62,7 @@ export const useTagsViewStore = defineStore("tags-view", () => {
     if (index !== -1) {
       cachedViews.value = cachedViews.value.slice(index, index + 1)
     } else {
-      // 如果 index = -1, 没有缓存的 tags
+      // If index = -1, there are no cached tags
       cachedViews.value = []
     }
   }
@@ -71,7 +70,7 @@ export const useTagsViewStore = defineStore("tags-view", () => {
 
   //#region delAll
   const delAllVisitedViews = () => {
-    // 保留固定的 tags
+    // // Keep fixed tags
     visitedViews.value = visitedViews.value.filter((tag) => tag.meta?.affix)
   }
 

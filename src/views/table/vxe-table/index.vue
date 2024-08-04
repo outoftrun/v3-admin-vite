@@ -46,14 +46,14 @@ const xGridOpt: VxeGridProps = reactive({
         field: "username",
         itemRender: {
           name: "$input",
-          props: { placeholder: "用户名", clearable: true }
+          props: { placeholder: "username", clearable: true }
         }
       },
       {
         field: "phone",
         itemRender: {
           name: "$input",
-          props: { placeholder: "手机号", clearable: true }
+          props: { placeholder: "Phone number", clearable: true }
         }
       },
       {
@@ -90,33 +90,33 @@ const xGridOpt: VxeGridProps = reactive({
     },
     {
       field: "username",
-      title: "用户名"
+      title: "username"
     },
     {
       field: "roles",
-      title: "角色",
+      title: "Role",
       /** 自定义列与 type: "html" 的列一起使用，会产生错误，所以采用 TSX 实现 */
       slots: RoleColumnSolts
     },
     {
       field: "phone",
-      title: "手机号"
+      title: "Phone number"
     },
     {
       field: "email",
-      title: "邮箱"
+      title: "email"
     },
     {
       field: "status",
-      title: "状态",
+      title: "Status",
       slots: StatusColumnSolts
     },
     {
       field: "createTime",
-      title: "创建时间"
+      title: "createTime"
     },
     {
-      title: "操作",
+      title: "Operation",
       width: "150px",
       fixed: "right",
       showOverflow: false,
@@ -125,7 +125,7 @@ const xGridOpt: VxeGridProps = reactive({
   ],
   /** 数据代理配置项（基于 Promise API） */
   proxyConfig: {
-    /** 启用动态序号代理 */
+    /** Enable动态序号代理 */
     seq: true,
     /** 是否代理表单 */
     form: true,
@@ -201,12 +201,12 @@ const xFormOpt: VxeFormProps = reactive({
   items: [
     {
       field: "username",
-      title: "用户名",
+      title: "username",
       itemRender: { name: "$input", props: { placeholder: "请输入" } }
     },
     {
       field: "password",
-      title: "密码",
+      title: "password",
       itemRender: { name: "$input", props: { placeholder: "请输入" } }
     },
     {
@@ -274,7 +274,7 @@ const crudStore = reactive({
       crudStore.isUpdate = false
       xModalOpt.title = "新增用户"
     }
-    // 禁用表单项
+    // Disable表单项
     const props = xFormOpt.items?.[0]?.itemRender?.props
     props && (props.disabled = crudStore.isUpdate)
     xModalDom.value?.open()
@@ -292,7 +292,7 @@ const crudStore = reactive({
       const callback = () => {
         xFormOpt.loading = false
         xModalDom.value?.close()
-        ElMessage.success("操作成功")
+        ElMessage.success("Operation成功")
         !crudStore.isUpdate && crudStore.afterInsert()
         crudStore.commitQuery()
       }
@@ -356,9 +356,9 @@ const crudStore = reactive({
       <!-- 左侧按钮列表 -->
       <template #toolbar-btns>
         <vxe-button status="primary" icon="vxe-icon-add" @click="crudStore.onShowModal()">新增用户</vxe-button>
-        <vxe-button status="danger" icon="vxe-icon-delete">批量删除</vxe-button>
+        <vxe-button status="danger" icon="vxe-icon-delete">batch deletion</vxe-button>
       </template>
-      <!-- 操作 -->
+      <!-- Operation -->
       <template #row-operate="{ row }">
         <el-button link type="primary" @click="crudStore.onShowModal(row)">修改</el-button>
         <el-button link type="danger" @click="crudStore.onDelete(row)">删除</el-button>

@@ -27,10 +27,10 @@ export const useUserStore = defineStore("user", () => {
   const getInfo = async () => {
     const { data } = await getUserInfoApi()
     username.value = data.username
-    // 验证返回的 roles 是否为一个非空数组，否则塞入一个没有任何作用的默认角色，防止路由守卫逻辑进入无限循环
+    // 验证返回的 roles 是否为一个非空数组，否则塞入一个没有任何作用的默认Role，防止路由守卫逻辑进入无限循环
     roles.value = data.roles?.length > 0 ? data.roles : routeSettings.defaultRoles
   }
-  /** 模拟角色变化 */
+  /** 模拟Role变化 */
   const changeRoles = async (role: string) => {
     const newToken = "token-" + role
     token.value = newToken

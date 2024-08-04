@@ -53,7 +53,7 @@ const flatTree = (arr: RouteRecordRaw[], result: RouteRecordRaw[] = []) => {
 /** 关闭搜索对话框 */
 const handleClose = () => {
   modelValue.value = false
-  // 延时处理防止用户看到重置数据的操作
+  // 延时处理防止用户看到重置数据的Operation
   setTimeout(() => {
     keyword.value = ""
     resultList.value = []

@@ -11,7 +11,7 @@ watch(switchRoles, (value) => {
 
 <template>
   <div>
-    <div>你的角色：{{ userStore.roles }}</div>
+    <div>你的Role：{{ userStore.roles }}</div>
     <div class="switch-roles">
       <span>切换用户（模拟重新登录）：</span>
       <el-radio-group v-model="switchRoles">

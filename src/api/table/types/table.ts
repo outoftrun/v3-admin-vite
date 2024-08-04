@@ -9,9 +9,9 @@ export interface TableRequestData {
   currentPage: number
   /** 查询条数 */
   size: number
-  /** 查询参数：用户名 */
+  /** 查询参数：username */
   username?: string
-  /** 查询参数：手机号 */
+  /** 查询参数：Phone number */
   phone?: string
 }
 

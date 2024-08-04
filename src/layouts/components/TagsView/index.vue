@@ -18,13 +18,13 @@ const { listenerRouteChange } = useRouteListener()
 /** 标签页组件元素的引用数组 */
 const tagRefs = ref<InstanceType<typeof RouterLink>[]>([])
 
-/** 右键菜单的状态 */
+/** 右键菜单的Status */
 const visible = ref(false)
 /** 右键菜单的 top 位置 */
 const top = ref(0)
 /** 右键菜单的 left 位置 */
 const left = ref(0)
-/** 当前正在右键操作的标签页 */
+/** 当前正在右键Operation的标签页 */
 const selectedTag = ref<TagView>({})
 /** 固定的标签页 */
 let affixTags: TagView[] = []
@@ -77,13 +77,13 @@ const addTags = (route: RouteLocationNormalizedLoaded) => {
   }
 }
 
-/** 刷新当前正在右键操作的标签页 */
+/** 刷新当前正在右键Operation的标签页 */
 const refreshSelectedTag = (view: TagView) => {
   tagsViewStore.delCachedView(view)
   router.replace({ path: "/redirect" + view.path, query: view.query })
 }
 
-/** 关闭当前正在右键操作的标签页 */
+/** 关闭当前正在右键Operation的标签页 */
 const closeSelectedTag = (view: TagView) => {
   tagsViewStore.delVisitedView(view)
   tagsViewStore.delCachedView(view)
@@ -140,7 +140,7 @@ const openMenu = (tag: TagView, e: MouseEvent) => {
   top.value = e.clientY
   // 显示面板
   visible.value = true
-  // 更新当前正在右键操作的标签页
+  // 更新当前正在右键Operation的标签页
   selectedTag.value = tag
 }
 

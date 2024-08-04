@@ -10,7 +10,6 @@ const hasPermission = (roles: string[], route: RouteRecordRaw) => {
   const routeRoles = route.meta?.roles
   return routeRoles ? roles.some((role) => routeRoles.includes(role)) : true
 }
-
 const filterDynamicRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
   const res: RouteRecordRaw[] = []
   routes.forEach((route) => {
@@ -24,20 +23,29 @@ const filterDynamicRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
   })
   return res
 }
-
 export const usePermissionStore = defineStore("permission", () => {
-  /** 可访问的路由 */
+  /** Accessible routes*/
   const routes = ref<RouteRecordRaw[]>([])
-  /** 有访问权限的动态路由 */
+  /** Dynamic routes with access permissions*/
   const addRoutes = ref<RouteRecordRaw[]>([])
 
-  /** 根据角色生成可访问的 Routes（可访问的路由 = 常驻路由 + 有访问权限的动态路由） */
+  /** Generate
+  accessible
+  Routes
+  based
+  on
+  Role(accessible
+  routes = resident
+  routes + dynamic
+  routes
+  with access rights
+) */
   const setRoutes = (roles: string[]) => {
     const accessedRoutes = filterDynamicRoutes(dynamicRoutes, roles)
     _set(accessedRoutes)
   }
 
-  /** 所有路由 = 所有常驻路由 + 所有动态路由 */
+  /** All routes = all permanent routes + all dynamic routes*/
   const setAllRoutes = () => {
     _set(dynamicRoutes)
   }
@@ -46,11 +54,9 @@ export const usePermissionStore = defineStore("permission", () => {
     routes.value = constantRoutes.concat(accessedRoutes)
     addRoutes.value = routeSettings.thirdLevelRouteCache ? flatMultiLevelRoutes(accessedRoutes) : accessedRoutes
   }
-
   return { routes, addRoutes, setRoutes, setAllRoutes }
 })
 
-/** 在 setup 外使用 */
-export function usePermissionStoreHook() {
+/** Use outside setup */ export function usePermissionStoreHook() {
   return usePermissionStore(store)
 }
