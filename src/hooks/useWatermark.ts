@@ -11,7 +11,7 @@ type DefaultConfig = typeof defaultConfig
 
 /** 默认配置 */
 const defaultConfig = {
-  /** 防御（默认开启，能防御水印被删除或隐藏，但可能会有性能损耗） */
+  /** 防御（默认开启，能防御水印被delete或隐藏，但可能会有性能损耗） */
   defense: true,
   /** 文本颜色 */
   color: "#c0c4cc",
@@ -35,7 +35,7 @@ const bodyEl = ref<HTMLElement>(document.body)
 /**
  * 创建水印
  * 1. 可以选择传入挂载水印的容器元素，默认是 body
- * 2. 做了水印防御，能有效防御别人打开控制台删除或隐藏水印
+ * 2. 做了水印防御，能有效防御别人打开控制台delete或隐藏水印
  */
 export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
   /** 备份文本 */
@@ -125,7 +125,7 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
     try {
       parentEl.value.removeChild(watermarkEl)
     } catch {
-      // 比如在无防御情况下，用户打开控制台删除了这个元素
+      // 比如在无防御情况下，用户打开控制台delete了这个元素
       console.warn("水印元素已不存在，请重新创建")
     } finally {
       watermarkEl = null
@@ -179,7 +179,7 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
   const addMutationListener = (targetNode: HTMLElement) => {
     // 当观察到变动时执行的回调
     const mutationCallback = debounce((mutationList: MutationRecord[]) => {
-      // 水印的防御（防止用户手动删除水印元素或通过 CSS 隐藏水印）
+      // 水印的防御（防止用户手动delete水印元素或通过 CSS 隐藏水印）
       mutationList.forEach(
         debounce((mutation: MutationRecord) => {
           switch (mutation.type) {
@@ -202,7 +202,7 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
     observer.watermarkElMutationObserver.observe(watermarkEl!, {
       // 观察目标节点属性是否变动，默认为 true
       attributes: true,
-      // 观察目标子节点是否有添加或者删除，默认为 false
+      // 观察目标子节点是否有添加或者delete，默认为 false
       childList: false,
       // 是否拓展到观察所有后代节点，默认为 false
       subtree: false

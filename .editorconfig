@@ -16,7 +16,7 @@ indent_size = 2
 end_of_line = lf
 ## 是否在文件末尾插入空白行
 insert_final_newline = true
-## 是否删除一行中的前后空格
+## 是否delete一行中的前后空格
 trim_trailing_whitespace = true
 
 # 适用 .md 文件

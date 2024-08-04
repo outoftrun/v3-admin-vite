@@ -64,7 +64,7 @@ defineExpose({ getScrollTop })
 </script>
 
 <template>
-  <!-- 外层 div 不能删除，是用来接收父组件 click 事件的 -->
+  <!-- 外层 div 不能delete，是用来接收父组件 click 事件的 -->
   <div>
     <div
       v-for="(item, index) in list"
